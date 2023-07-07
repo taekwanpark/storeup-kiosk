@@ -3,6 +3,9 @@ export default {
   content: ['./src/render/srcindex.html', './src/**/*.{js,ts,jsx,tsx,vue}'],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ['Pretendard']
+      },
       colors: {
         // dark
         dark_24: '#24272e',
@@ -15,7 +18,7 @@ export default {
         grey_bluey_a7: '#a7a7a8',
         grey_bluey_8c: '#8c96ac',
         grey_bluey_9b: '#9ba2b1',
-        pale_grey: '#eaf4ff',
+        grey_pale: '#eaf4ff',
         // white
         white_f5: '#f5f5f5',
         white_ff: '#ffffff',
@@ -28,11 +31,14 @@ export default {
         orange_blood: '#ff4e00'
       },
       spacing: {
+        8.25: '2.0625rem',
         13: '3.25rem',
         15: '3.75rem',
         17: '4.25rem',
         28: '7rem',
-        30: '7.5rem'
+        30: '7.5rem',
+        68: '17rem',
+        100: '25rem'
       },
       fontSize: {
         k10: '2.5rem',

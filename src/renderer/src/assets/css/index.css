@@ -1,137 +1,143 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer {
+@layer components {
+}
+@layer utilities {
   /* 
-    |------------------------------------------------------------------------
-    | text-theme
-    |------------------------------------------------------------------------
-    | fit
-    | basic
-    | semiwide
-    | wide
-    | poppins: font-family
-    */
-  /* ------------------------------------------------ */
-  .kiosk-text-headline-lg {
-    @apply text-k10 leading-normal tracking-[-0.6px] text-dark_24 font-bold;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-headline-md-1 {
-    @apply text-k9 leading-[3.25rem] tracking-[-0.68px] text-dark_24 font-bold;
-  }
-  .kiosk-text-headline-md-2 {
-    @apply text-k9 leading-[3.25rem] tracking-[-0.68px] text-blue_bright font-bold;
-  }
-  .kiosk-text-headline-md-3 {
-    @apply text-k9 leading-[3.25rem] tracking-[-0.68px] text-grey_charcoal_28 font-bold;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-headline-sm-1 {
-    @apply text-k8 leading-normal tracking-[-0.48px] text-white_f5 font-medium;
-  }
-  .kiosk-text-headline-sm-2 {
-    @apply text-k8 leading-normal tracking-[-0.48px] text-dark_24 font-medium;
-  }
-  .kiosk-text-headline-sm-3 {
-    @apply text-k8 leading-normal tracking-[-0.48px] text-grey_brown font-medium;
-  }
-  .kiosk-text-headline-sm-4 {
-    @apply text-k8 leading-[3.25rem] tracking-[-0.61px] text-dark_24 font-medium;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-30-1 {
-    @apply text-k7.5 leading-normal tracking-[-0.57px] text-dark_29 font-semibold;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-body-md-10 {
-    @apply text-k6 leading-normal -tracking-normal text-white_f5 font-medium;
-  }
-  .kiosk-text-body-md-9 {
+  |-------------------------------
+  | chip-btn
+  |------------------------------- 
+  */
+  .chip-btn-text {
     @apply text-k6 leading-normal -tracking-normal text-dark_24 font-medium;
-  }
-  .kiosk-text-body-md-8 {
-    @apply text-k6 leading-[2.4375rem] tracking-[-0.46px] text-[#fffefe] font-medium;
-  }
-  .kiosk-text-body-md-7 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-blue_bright font-medium;
-  }
-  .kiosk-text-body-md-6 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-grey_charcoal_42 font-normal;
-  }
-  .kiosk-text-body-md-5 {
-    @apply text-k6 leading-[1.375rem] tracking-[-0.46px] text-[#000000] font-normal;
-  }
-  .kiosk-text-body-md-4 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-grey_bluey_a7 font-normal;
-  }
-  .kiosk-text-body-md-3 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-azure font-normal;
-  }
-  .kiosk-text-body-md-2 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-[#9a9a9a] font-normal;
-  }
-  .kiosk-text-body-md-1 {
-    @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-[#000000] font-normal;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-body-sm-1 {
-    @apply text-k5.5 leading-normal tracking-[-0.33px] text-[#c6ccd8] font-medium;
-  }
-  .kiosk-text-body-sm-2 {
-    @apply text-k5.5 leading-normal tracking-[-0.33px] text-white_f5 font-medium;
-  }
-  .kiosk-text-body-sm-3 {
-    @apply text-k5.5 leading-[1.75rem] tracking-[-0.33px] text-grey_charcoal_42  font-normal;
-  }
-  /* TODO font-family */
-  .kiosk-text-body-sm-poppins-1 {
-    @apply text-k5.5 leading-[1.75rem] tracking-[-0.33px] text-grey_charcoal_28 font-normal;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-caption-md-1 {
-    @apply text-k5 leading-normal tracking-[-0.38px] text-dark_24 font-normal;
-  }
-  .kiosk-text-caption-md-2 {
-    @apply text-k5 leading-normal tracking-normal text-dark_24 font-medium;
-  }
-  /* ------------------------------------------------ */
-  .kiosk-text-caption-sm-1 {
-    @apply text-k4.5 leading-[2.25rem] tracking-[-0.34px] text-blue_cerulean font-medium;
-  }
-  .kiosk-text-caption-sm-2 {
-    @apply text-k4.5 leading-[2.25rem] tracking-[-0.34px] text-[#d30000] font-medium;
   }
 
   /* 
-|------------------------------------------------------------------------
-| ui-theme
-|------------------------------------------------------------------------
-*/
-  /* chip-btn */
-  .chip-btn-text-dark {
-    @apply text-k6 leading-normal -tracking-normal text-dark_24 font-medium;
-  }
-  .chip-btn-text-white {
-    @apply text-k6 leading-normal -tracking-normal text-white_ff font-medium;
-  }
-
-  /* list-item */
-  .list-item-title {
+  |-------------------------------
+  | list-item
+  |------------------------------- 
+  */
+  .list-item-display-title {
     @apply text-k9 leading-[3.25rem] tracking-[-0.68px] text-dark_24 font-bold;
   }
-  .list-item-search-caption {
+  /* search */
+  .list-item-display-search-caption {
     @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-grey_charcoal_42 font-normal;
   }
-  .list-item-search-caption-accent {
+  .list-item-display-search-caption-accent {
     @apply text-k6 leading-[2.25rem] tracking-[-0.46px] text-blue_bright font-medium;
   }
-  .list-item-event-caption {
+  /* event */
+  .list-item-display-event-caption {
     @apply text-k5.5 leading-[1.75rem] tracking-[-0.33px] text-grey_charcoal_42 font-normal;
   }
-  .list-item-event-image-badge {
+  .list-item-display-event-image-badge {
     @apply text-k5 leading-[1.75rem] tracking-[-0.3px] text-white_ff font-normal;
   }
-  /*  */
+  /* 
+  |-------------------------------
+  | card
+  |------------------------------- 
+  */
+  .card-status-badge {
+    @apply text-k4.5 leading-none tracking-[-0.34px] font-medium;
+  }
+  .card-store-name {
+    @apply text-k9 leading-[2.69rem] tracking-[-0.68px] text-dark_24 font-bold;
+  }
+  .card-information {
+    @apply text-k6 leading-normal tracking-[-0.46px] text-[#000000] font-normal;
+  }
+  .card-information-link {
+    @apply text-k6 leading-normal tracking-[-0.46px] font-normal text-azure underline underline-offset-4;
+  }
+  /* 
+  |------------------------------------------------------------------------
+  | navgation
+  |------------------------------------------------------------------------
+  */
+  .main-nav-label {
+    @apply text-k8 leading-[2.5rem] tracking-[-0.48px] font-normal text-white_ff;
+  }
+  .bottom-nav-label {
+    @apply text-k5.5 leading-normal tracking-[-0.33px] font-medium text-[#c6ccd8];
+  }
+  /* 
+  |------------------------------------------------------------------------
+  | app bar title
+  |------------------------------------------------------------------------
+  */
+  .abb-bar-title {
+    @apply text-k10 leading-normal tracking-[-0.6px] font-bold text-dark_24;
+  }
+  /* 
+  |------------------------------------------------------------------------
+  | text-theme
+  |------------------------------------------------------------------------
+  */
+  /* ------------------------------------------------ */
+  /* Headline */
+  .headling-sm-normal {
+    @apply text-k10 leading-normal tracking-[-0.6px];
+  }
+
+  /* ------------------------------------------------ */
+  /* Title - lg */
+  .title-lg {
+    @apply text-k9 leading-[3.25rem] tracking-[-0.68px];
+  }
+
+  /* Title - md */
+  .title-md {
+    @apply text-k8 leading-normal tracking-[-0.48px];
+  }
+
+  .title-md-fit {
+    @apply text-k8 leading-[3.25rem] tracking-[-0.61px];
+  }
+
+  /* Title - sm */
+  .title-sm {
+    @apply text-k7.5 leading-normal tracking-[-0.57px];
+  }
+  /* ------------------------------------------------ */
+  /* Body - lg */
+  .body-lg {
+    @apply text-k6 -tracking-normal;
+  }
+  .body-lg-fit {
+    @apply text-k6 leading-[2.4375rem] tracking-[-0.46px];
+  }
+  .body-lg-7-fit {
+    @apply text-k6 leading-[2.25rem] tracking-[-0.46px];
+  }
+  .body-lg-5-fit {
+    @apply text-k6 leading-[1.375rem] tracking-[-0.46px];
+  }
+
+  /* Body - md */
+  .body-md-normal {
+    @apply text-k5.5 leading-normal tracking-[-0.33px];
+  }
+  .body-md-3 {
+    @apply text-k5.5 leading-[1.75rem] tracking-[-0.33px];
+  }
+
+  /* ------------------------------------------------ */
+  /* Caption - lg */
+  .caption-lg-normal {
+    @apply text-k5 leading-normal tracking-normal;
+  }
+  .caption-lg-fit {
+    @apply text-k5 leading-normal tracking-[-0.38px];
+  }
+
+  /* Caption - md */
+  .caption-md-normal {
+    @apply text-k4.5 leading-[2.25rem] tracking-[-0.34px];
+  }
 }

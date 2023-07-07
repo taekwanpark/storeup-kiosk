@@ -3,7 +3,11 @@ enum EtcIconType {
   ArrowDown = 'ArrowDown',
   ArrowRight = 'ArrowRight',
   ArrowLeft = 'ArrowLeft',
-  Logo = 'Logo'
+  Logo = 'Logo',
+  Map = 'Map',
+  Cash = 'Cash',
+  Clock = 'Clock',
+  Contact = 'Contact'
 }
 enum MapIconType {
   CurrentPointerBasic = 'CurrentPointerBasic',
@@ -23,52 +27,29 @@ enum CountryIconType {
   Japan = 'Japan'
 }
 
+enum MainNavigationIconType {
+  Event = 'Event',
+  Talk = 'Talk',
+  Food = 'Food',
+  Shop = 'Shop',
+  Magnifying = 'Magnifying',
+  Facility = 'Facility'
+}
+
 enum NavigationIconType {
   HomeDark = 'HomeDark',
   EventDark = 'EventDark',
-  EventLight = 'EventLight',
+  // EventLight = 'EventLight',
   TalkDark = 'TalkDark',
-  TalkLight = 'TalkLight',
+  // TalkLight = 'TalkLight',
   FoodDark = 'FoodDark',
-  FoodLight = 'FoodLight',
+  // FoodLight = 'FoodLight',
   ShopDark = 'ShopDark',
-  ShopLight = 'ShopLight',
+  // ShopLight = 'ShopLight',
   MagnifyingDark = 'MagnifyingDark',
-  MagnifyingLight = 'MagnifyingLight',
-  FacilityDark = 'FacilityDark',
-  FacilityLight = 'FacilityLight'
-}
-
-enum MapChipType {
-  BuanMarketColor = 'BuanMarketColor',
-  BuanMarketWhite = 'BuanMarketWhite',
-  ElectronicChargeColor = 'ElectronicChargeColor',
-  ElectronicChargeWhite = 'ElectronicChargeWhite',
-  ParkingColor = 'ParkingColor',
-  ParkingWhite = 'ParkingWhite',
-  RedStreetColor = 'RedStreetColor',
-  RedStreetWhite = 'RedStreetWhite',
-  SentimentalStreetColor = 'SentimentalStreetColor',
-  SentimentalStreetWhite = 'SentimentalStreetWhite',
-  ShelterColor = 'ShelterColor',
-  ShelterWhite = 'ShelterWhite',
-  ToiletColor = 'ToiletColor',
-  ToiletWhite = 'ToiletWhite',
-  WholeColor = 'WholeColor',
-  WholeWhite = 'WholeWhite',
-  YouthStreetColor = 'YouthStreetColor',
-  YouthStreetWhite = 'YouthStreetWhite'
-}
-enum MapChipIconType {
-  BuanMarket = 'BuanMarket',
-  ElectronicCharge = 'ElectronicCharge',
-  Parking = 'Parking',
-  RedStreet = 'RedStreet',
-  SentimentalStreet = 'SentimentalStreet',
-  Shelter = 'Shelter',
-  Toilet = 'Toilet',
-  Whole = 'Whole',
-  YouthStreet = 'YouthStreet'
+  // MagnifyingLight = 'MagnifyingLight',
+  FacilityDark = 'FacilityDark'
+  // FacilityLight = 'FacilityLight'
 }
 
 enum IconDirectoryType {
@@ -76,15 +57,15 @@ enum IconDirectoryType {
   Country = 'country',
   Map = 'map',
   MapChip = 'map-chip',
-  Navigation = 'navigation'
+  Navigation = 'navigation',
+  MainNavigation = 'main-navigation'
 }
 
 export {
   IconDirectoryType,
   EtcIconType,
   MapIconType,
-  MapChipIconType,
-  MapChipType,
   CountryIconType,
+  MainNavigationIconType,
   NavigationIconType
 }

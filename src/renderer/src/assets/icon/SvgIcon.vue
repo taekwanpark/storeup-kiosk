@@ -1,24 +1,32 @@
 <template>
-  <component :is="dynamicComponent" />
+  <component :is="dynamicComponent" class="flex-none" />
 </template>
 
 <script setup lang="ts">
+import { computed, defineAsyncComponent } from 'vue'
+// type
+import { MapChipType } from '@renderer/common/chipButton/chipButtonType'
 import {
   IconDirectoryType,
   EtcIconType,
   MapIconType,
   CountryIconType,
   NavigationIconType,
-  MapChipType
+  MainNavigationIconType
 } from '@renderer/types/iconType'
-import { computed, defineAsyncComponent } from 'vue'
 
 interface Props {
-  icon: EtcIconType | MapIconType | CountryIconType | NavigationIconType | MapChipType
+  icon:
+    | EtcIconType
+    | MapIconType
+    | CountryIconType
+    | NavigationIconType
+    | MapChipType
+    | MainNavigationIconType
 }
 const props = defineProps<Props>()
 const dynamicComponent = computed(() => {
-  let directory
+  let directory: IconDirectoryType
   if (EtcIconType[props.icon] !== undefined) {
     directory = IconDirectoryType.Etc
   } else if (NavigationIconType[props.icon] !== undefined) {
@@ -29,6 +37,8 @@ const dynamicComponent = computed(() => {
     directory = IconDirectoryType.Country
   } else if (MapChipType[props.icon] !== undefined) {
     directory = IconDirectoryType.MapChip
+  } else {
+    directory = IconDirectoryType.MainNavigation
   }
   return defineAsyncComponent(() => import(`@renderer/assets/icon/${directory}/${props.icon}.vue`))
 })

@@ -5,7 +5,7 @@
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.vue",
     "src/preload/*.d.ts",
-    "src/libs/**/*",
+    "src/renderer/src/libs/**/*",
   ],
   "compilerOptions": {
     "composite": true,
@@ -13,7 +13,6 @@
     "paths": {
       "@renderer/*": ["src/renderer/src/*"],
       "@typings/*":["src/typings/*"],
-      "@libs/*":["src/libs/*"],
     },
     "types": [
       "vite-svg-loader"

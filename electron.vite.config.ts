@@ -14,8 +14,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@renderer': resolve(__dirname, './src/renderer/src'),
-        '@typings': resolve(__dirname, './src/typings'),
-        '@libs': resolve(__dirname, './src/libs')
+        '@typings': resolve(__dirname, './src/typings')
       }
     },
 
