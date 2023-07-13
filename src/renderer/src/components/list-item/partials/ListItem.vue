@@ -3,9 +3,9 @@
     <!-- ------------------------------------------------------------------------
     thumbnail [only event]  
     ------------------------------------------------------------------------ -->
-    <!-- TODO -radius 이상 -->
-    <template v-if="listType !== ListType.Search">
+    <template v-if="listItemType === ListItemTypes.Event">
       <div class="relative mr-7 w-64 h-36 flex-none rounded-[20px] bg-gray-100 overflow-hidden">
+        <!-- thumbnail -->
         <div class="w-full h-full">
           <img
             :src="'src/assets/' + thumbnail"
@@ -13,7 +13,8 @@
             class="object-cover object-center w-full h-full"
           />
         </div>
-        <template v-if="listType === ListType.EndedEvent">
+        <!-- event ended -->
+        <template v-if="eventStatusType === EventStautsTypes.Ended">
           <div
             class="absolute inset-0 w-full h-full bg-black/[0.58] flex items-center justify-center"
           >
@@ -32,7 +33,7 @@
     ------------------------------------------------------------------------ -->
     <div
       class="w-full flex flex-col"
-      :class="listType !== ListType.Search ? 'justify-start' : 'justify-center'"
+      :class="listItemType === ListItemTypes.Search ? 'justify-start' : 'justify-start'"
     >
       <!-- title -->
       <p ref="titleRef" class="list-item-display-title text-left line-clamp-2">
@@ -42,13 +43,13 @@
       <div class="mt-3">
         <p
           :class="
-            listType !== ListType.Search
-              ? 'list-item-display-event-caption'
-              : 'list-item-display-search-caption'
+            listItemType === ListItemTypes.Event
+              ? 'list-item-display-search-caption'
+              : 'list-item-display-event-caption'
           "
         >
           {{ caption }}
-          <template v-if="listType === ListType.Search">
+          <template v-if="listItemType === ListItemTypes.Search">
             <span class="list-item-display-search-caption-accent ml-2.5">{{ captionAccent }}</span>
           </template>
         </p>
@@ -59,11 +60,14 @@
     icon button
     ------------------------------------------------------------------------ -->
     <div class="ml-15 w-28 -my-10 aspect-square self-center">
-      <template v-if="listType !== ListType.Search">
-        <SvgIcon :icon="EtcIconType.ArrowDown" />
+      <template v-if="listItemType === ListItemTypes.Event">
+        <SvgIcon :icon="EtcIconType.ArrowRight" @click="tabItem(id)" />
       </template>
       <template v-else>
-        <SvgIcon :icon="EtcIconType.ArrowRight" />
+        <SvgIcon
+          :icon="isOpen ? EtcIconType.ArrowUp : EtcIconType.ArrowDown"
+          @click="tabItem(id)"
+        />
       </template>
     </div>
   </div>
@@ -73,14 +77,41 @@
 import { Ref, onMounted, ref } from 'vue'
 // type
 import '@typings/renderer.d.ts'
-import { EtcIconType } from '@renderer/types/iconType'
-import { ListItemProps, ListType } from '@renderer/common/listItem/listItemType'
+import { EtcIconType } from '@renderer/components/icon/types'
+import {
+  ListItemTypes,
+  ListItemTypeKeys,
+  EventStautsTypes,
+  EventStatusTypeKeys,
+  TabItemKey
+} from '@renderer/components/list-item/types'
 // vue
-import SvgIcon from '@renderer/assets/icon/SvgIcon.vue'
+import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
 // lib
 import { heightAdjustHandler } from '@renderer/libs/useHeightAdjustHandler'
+import { injectStrict } from '@renderer/libs/useInjectStrict'
 
+export interface ListItemProps {
+  isOpen?: boolean
+  id: string
+  listItemType: ListItemTypeKeys
+  eventStatusType?: EventStatusTypeKeys
+  title: string
+  caption: string
+  captionAccent?: string
+  thumbnail?: string
+  queryString?: string
+}
+// props
 const props = defineProps<ListItemProps>()
+
+/* TODO
+|----------------------------------------------------------------------------------------------------
+| tab item
+|----------------------------------------------------------------------------------------------------
+*/
+const tabItem = injectStrict(TabItemKey)
+
 /* TODO
 |----------------------------------------------------------------------------------------------------
 | 날짜입력
@@ -104,7 +135,6 @@ const props = defineProps<ListItemProps>()
 */
 const titleRef: Ref<HTMLElement | null> = ref(null)
 onMounted(() => {
-  console.log('### [ListItem]: mounted ###')
   if (titleRef.value) {
     if (props.queryString) {
       const regex = new RegExp(props.queryString, 'gi')
@@ -131,22 +161,42 @@ onMounted(() => {
   heightAdjustHandler({
     selector: 'list-item-display-search-caption',
     fontSize: 1.5,
-    lineHeight: 2.25,
     height: 1.812
   })
   heightAdjustHandler({
     selector: 'list-item-display-search-caption-accent',
     fontSize: 1.5,
-    lineHeight: 2.25,
     height: 1.812
   })
   heightAdjustHandler({
     selector: 'list-item-display-event-caption',
     fontSize: 1.375,
-    lineHeight: 1.75,
     height: 1.625
   })
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+/* 
+  |-------------------------------
+  | list-item
+  |------------------------------- 
+  */
+.list-item-display-title {
+  @apply text-k9 leading-[1.5] tracking-[-0.68px] text-dark_24 font-bold;
+}
+/* search */
+.list-item-display-search-caption {
+  @apply text-k6 leading-[1.2] tracking-[-0.46px] text-grey_charcoal_42 font-normal;
+}
+.list-item-display-search-caption-accent {
+  @apply text-k6 leading-[1.2] tracking-[-0.46px] text-blue_bright font-medium;
+}
+/* event */
+.list-item-display-event-caption {
+  @apply text-k5.5 leading-[1.2] tracking-[-0.33px] text-grey_charcoal_42 font-normal;
+}
+.list-item-display-event-image-badge {
+  @apply text-k5 leading-[1.2] tracking-[-0.3px] text-white_ff font-normal;
+}
+</style>

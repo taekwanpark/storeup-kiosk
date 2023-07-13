@@ -7,18 +7,22 @@
 interface HeightAdjustParams {
   selector: string
   fontSize: number
-  lineHeight: number
+  lineHeight?: number
   height: number
 }
+
 export function heightAdjustHandler({
   selector,
   lineHeight,
   height,
   fontSize
 }: HeightAdjustParams): void {
-  const divideGap = (fontSize - lineHeight + (height - fontSize)) / 2
+  const divideGap =
+    (fontSize - (lineHeight ? lineHeight : fontSize * 1.25) + (height - fontSize)) / 2
+
   const margin = `${divideGap}rem`
   const elements = document.getElementsByClassName(selector)
+
   for (const element of elements) {
     const htmlElement = element as HTMLElement
     htmlElement.style.marginTop = margin

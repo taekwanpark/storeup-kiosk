@@ -1,5 +1,5 @@
 {
-  "name": "storeup-kiosk",
+  "name": "storeup-",
   "version": "1.0.0",
   "description": "An Electron application with Vue and TypeScript",
   "author": "amuz",
@@ -23,6 +23,7 @@
     "@electron-toolkit/utils": "^1.0.2",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^5.3.0",
+    "simple-keyboard": "^3.6.26",
     "vite-svg-loader": "^4.0.0",
     "vue-router": "^4.2.4"
   },

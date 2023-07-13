@@ -7,13 +7,13 @@
     viewBox="0 0 80 80"
   >
     <defs>
-      <clipPath id="6vu4xn05va">
+      <clipPath id="lj8kkuurka">
         <path data-name="사각형 1069" style="fill: #8c96ac" d="M0 0h60.299v60.299H0z" />
       </clipPath>
     </defs>
     <path data-name="사각형 1076" style="fill: none" d="M0 0h80v80H0z" />
     <g data-name="그룹 187">
-      <g data-name="그룹 179" style="clip-path: url(#6vu4xn05va)" transform="translate(9.851 9.85)">
+      <g data-name="그룹 179" style="clip-path: url(#lj8kkuurka)" transform="translate(9.851 9.85)">
         <path
           data-name="패스 307"
           d="M5.65 87.528a1 1 0 0 1-.339-1.936l9.717-3.515.022-.008a1.553 1.553 0 0 0 .906-1.989l-5.492-13.733a1.533 1.533 0 0 0-1.957-.947l-7.17 2.594a1 1 0 1 1-.678-1.876l7.171-2.593a3.52 3.52 0 0 1 4.5 2.113l5.49 13.728a3.558 3.558 0 0 1-2.087 4.578l-.016.006-9.728 3.519a.994.994 0 0 1-.339.06"

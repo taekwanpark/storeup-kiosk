@@ -80,3 +80,11 @@ module.exports = {
   }
 }
 ```
+
+### Packages
+
+#### Virtual Keyboard
+
+```javascript
+$ npm i simple-keyboard
+```

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="w-full min-w-[67.5rem]">
     <div class="flex flex-nowrap gap-x-2 p-4 items-start">
       <div class="aspect-square w-0 bg-gray-300">0px</div>
@@ -26,7 +26,6 @@
       <div class="aspect-square w-17 bg-gray-300">68px</div>
     </div>
     <div class="border-red-500 border-2">
-      <!-- color set -->
       <div class="flex flex-wrap">
         <div class="w-20 h-20 bg-dark_24">#293043</div>
         <div class="w-20 h-20 bg-dark_29">#293043</div>
@@ -47,56 +46,53 @@
         <div class="w-20 h-20 bg-orange_blood">#293043</div>
       </div>
       <div class="flex flex-col gap-y-4">
-        <!--  -->
         <div>
           <div>18px</div>
           <div class="text-k4.5 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
+
         <div>
           <div>20px</div>
           <div class="text-k5 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
+
         <div>
           <div>22px</div>
           <div class="text-k5.5 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
         <div>
           <div>24px</div>
           <div class="text-k6 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
         <div>
           <div>30px</div>
           <div class="text-k7.5 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
+
         <div>
           <div>32px</div>
           <div class="text-k8 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
+
         <div>
           <div>36px</div>
           <div class="text-k9 border">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
           </div>
         </div>
-        <!--  -->
+
         <div>
           <div>40px</div>
           <div class="text-k10 border">
@@ -105,15 +101,6 @@
         </div>
       </div>
       <div class="flex flex-col gap-y-4 mt-10">
-        <!-- <div class="text-k6 font-thin border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
-      </div>
-      <div class="text-k6 font-extralight border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
-      </div>
-      <div class="text-k6 font-light border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
-      </div> -->
         <div class="text-k6 font-normal border">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
         </div>
@@ -126,14 +113,7 @@
         <div class="text-k6 font-bold border">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
         </div>
-        <!-- <div class="text-k6 font-extrabold border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
       </div>
-      <div class="text-k6 font-black border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, cupiditate!
-      </div> -->
-      </div>
-      <!-- chip icon -->
       <div class="flex flex-wrap gap-4 m-10">
         <ChipButton
           :is-selected="clickedChip"
@@ -204,8 +184,6 @@
         />
       </div>
 
-      <!-- ------------------------------------------------------------------------------------------------ -->
-      <!-- icons -->
       <div class="bg-gray-200">
         <div class="flex">
           <template v-for="icon in EtcIconType" :key="icon">
@@ -228,11 +206,11 @@
           </template>
         </div>
       </div>
-      <!-- ------------------------------------------------------------------------------------------------ -->
 
       <template v-for="(item, _index) in list" :key="_index">
         <ListItem
           :list-type="item.listType"
+          :event-type="item.eventType"
           :title="item.title"
           :query-string="item.queryString"
           :caption="item.caption"
@@ -241,9 +219,7 @@
         />
       </template>
 
-      <!-- ------------------------------------------------------------------------------------------------ -->
-      <ListItemCard :card-type="CardType.Map" />
-      <!-- ------------------------------------------------------------------------------------------------ -->
+      <CardItem :card-type="CardType.Map" />
     </div>
   </div>
 </template>
@@ -255,18 +231,20 @@ import {
   EtcIconType,
   MapIconType,
   CountryIconType,
+  MapChipType,
   NavigationIconType
-} from '@renderer/types/iconType'
-import { CardType, ListType } from '@renderer/common/listItem/listItemType'
-import { MapChipType } from '@renderer/common/chipButton/chipButtonType'
+} from '@renderer/components/icon/types'
+import { EventType, ListType } from '@renderer/components/list-item/types'
+import { CardType } from '@renderer/components/card-item/types/cardType'
 // vue
-import SvgIcon from '@renderer/assets/icon/SvgIcon.vue'
-import ListItem from '@renderer/common/listItem/ListItem.vue'
-import ChipButton from '@renderer/common/chipButton/ChipButton.vue'
-import ListItemCard from '@renderer/common/listItem/ListItemCard.vue'
+import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
+import ListItem from '@renderer/components/list-item/ListItem.vue'
+import CardItem from '@renderer/components/card-item/CardItem.vue'
+import ChipButton from '@renderer/components/buttons/chip-button/ChipButton.vue'
 
 interface ListDevType {
   listType: ListType
+  eventType?: EventType
   title: string
   titleAccent?: string
   caption: string
@@ -298,24 +276,27 @@ const list = reactive<ListDevType[]>([
     queryString: 'public'
   },
   {
-    listType: ListType.OngoinEevent,
+    listType: ListType.Event,
+    eventType: EventType.Ongoing,
     title:
       '부안군 정보화 농업인 연구회부안군 정보화 농업인 연구회부안군 정보화 농업인 연구회부안군 정보화 농업인 연구회부안군 정보화 농업인 연구회',
     caption: '2023.05.27',
     thumbnail: 'example1.jpg'
   },
   {
-    listType: ListType.EndedEvent,
+    listType: ListType.Event,
+    eventType: EventType.Ended,
     title: '부안군 정보화 농업인 연구회를 개최합니다.',
     caption: '2023.05.27',
     thumbnail: 'example2.jpg'
   },
   {
-    listType: ListType.OngoinEevent,
+    listType: ListType.Event,
+    eventType: EventType.Ongoing,
     title: '부안군 정보화 농업인 연구회를 개최합니다.',
     caption: '2023.05.27',
     thumbnail: 'example2.jpg'
   }
 ])
 </script>
-<style scoped></style>
+<style scoped></style> -->

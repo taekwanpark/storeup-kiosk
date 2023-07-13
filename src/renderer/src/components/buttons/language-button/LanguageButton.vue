@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-y-0 right-[3.25rem] flex items-center">
+  <div class="flex items-center">
     <div class="relative">
       <button
         class="rounded-[1.6875rem] border border-grey_bluey_9b backdrop-blur-lg"
@@ -77,9 +77,9 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
 // type
-import { CountryIconType } from '@renderer/types/iconType'
+import { CountryIconType } from '@renderer/components/icon/types'
 // vue
-import SvgIcon from '@renderer/assets/icon/SvgIcon.vue'
+import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
 
 defineProps({
   isMain: Boolean

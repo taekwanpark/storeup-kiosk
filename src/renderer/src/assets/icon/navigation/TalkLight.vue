@@ -1,13 +1,13 @@
 <template>
   <svg
-    data-name="구성 요소 19 – 3"
+    data-name="구성 요소 11 – 36"
     xmlns="http://www.w3.org/2000/svg"
     width="80"
     height="80"
     viewBox="0 0 80 80"
   >
     <defs>
-      <clipPath id="wvw24i0b7a">
+      <clipPath id="7or622oboa">
         <path data-name="사각형 1068" style="fill: #fff" d="M0 0h57.752v60.299H0z" />
       </clipPath>
     </defs>
@@ -15,8 +15,8 @@
     <g data-name="그룹 178">
       <g
         data-name="그룹 177"
-        transform="translate(11.124 9.85)"
-        style="clip-path: url(#wvw24i0b7a)"
+        style="clip-path: url(#7or622oboa)"
+        transform="translate(10.624 9.85)"
       >
         <path
           data-name="패스 303"

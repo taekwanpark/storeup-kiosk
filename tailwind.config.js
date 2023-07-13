@@ -32,11 +32,14 @@ export default {
       },
       spacing: {
         8.25: '2.0625rem',
+        8.5: '2.125rem',
         13: '3.25rem',
         15: '3.75rem',
         17: '4.25rem',
+        22: '5.5rem',
         28: '7rem',
         30: '7.5rem',
+        52: '13rem',
         68: '17rem',
         100: '25rem'
       },
@@ -45,6 +48,7 @@ export default {
         k9: '2.25rem',
         k8: '2rem',
         'k7.5': '1.875rem',
+        k7: '1.75rem',
         k6: '1.5rem',
         'k5.5': '1.375rem',
         k5: '1.25rem',

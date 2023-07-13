@@ -23,7 +23,7 @@ export function getDistance(args: DistanceArgsType): string {
     distance = (distance / 1000).toFixed(2)
   } else {
     // 1,000m 이하일 경우 소수점 버리기(m)
-    Math.floor(distance)
+    distance = Math.floor(distance)
   }
   return distance.toString()
 }
