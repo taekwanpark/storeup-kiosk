@@ -12,10 +12,10 @@
 
     <!-- list -->
     <!-- <div class="mt-6 flex gap-6 flex-wrap">
-          <template v-for="label in ['주차장', '전기차 충전소', '화장실']" :key="label">
-            <SearchRecommandItem :label="label" />
-          </template>
-        </div> -->
+      <template v-for="label in ['주차장', '전기차 충전소', '화장실']" :key="label">
+        <SearchRecommandItem :label="label" />
+      </template>
+    </div> -->
     <div class="mt-[16.25rem]">
       <ul class="">
         <template v-for="item in list" :key="item.queryString">
@@ -112,114 +112,6 @@ const list = [
     contact: '0507-1339-1343',
     fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
   }
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // },
-  // {
-  //   id: '2',
-  //   title: '아뮤즈 주차장',
-  //   queryString: '공영',
-  //   caption: '전북 부안군 부안읍 번영로 149',
-  //   captionAccent: '580m',
-  //   thumbnail: 'example2.jpg',
-  //   storeStatus: storeStatusType('Holiday'),
-  //   openingHours: '월~일 • 24시간',
-  //   contact: '0507-1339-1343',
-  //   fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
-  // }
 ]
 </script>
 

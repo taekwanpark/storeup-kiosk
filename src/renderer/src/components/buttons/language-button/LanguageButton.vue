@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div id="language-button" class="flex items-center">
     <div class="relative">
       <button
         class="rounded-[1.6875rem] border border-grey_bluey_9b backdrop-blur-lg"
@@ -39,27 +39,7 @@
             </li>
             <li class="w-full h-16 pr-4 pl-2 py-2 flex items-center">
               <div class="mr-2">
-                <SvgIcon :icon="CountryIconType.Japan" />
-              </div>
-              <span
-                class="language-option w-[3.188rem] text-k5 tracking-[-0.38px] text-dark_24 font-normal"
-              >
-                한국어
-              </span>
-            </li>
-            <li class="w-full h-16 pr-4 pl-2 py-2 flex items-center">
-              <div class="mr-2">
                 <SvgIcon :icon="CountryIconType.UnitedState" />
-              </div>
-              <span
-                class="language-option w-[3.188rem] text-k5 tracking-[-0.38px] text-dark_24 font-normal"
-              >
-                한국어
-              </span>
-            </li>
-            <li class="w-full h-16 pr-4 pl-2 py-2 flex items-center">
-              <div class="mr-2">
-                <SvgIcon :icon="CountryIconType.China" />
               </div>
               <span
                 class="language-option w-[3.188rem] text-k5 tracking-[-0.38px] text-dark_24 font-normal"
@@ -75,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { Ref, onMounted, ref } from 'vue'
 // type
 import { CountryIconType } from '@renderer/components/icon/types'
 // vue
@@ -93,6 +73,24 @@ const isButtonOpen: Ref<boolean> = ref(false)
 function onClickButton(): void {
   isButtonOpen.value = !isButtonOpen.value
 }
+
+/*
+|----------------------------------------------------------------------------------------------------
+| dismiss language button
+|----------------------------------------------------------------------------------------------------
+*/
+onMounted(() => {
+  document.addEventListener('click', function (e: Event) {
+    const buttonElement = document.getElementById('language-button')
+    if (e.target !== null && buttonElement !== null) {
+      const childNode = e.target as Node
+      const isChildElement: boolean = buttonElement.contains(childNode)
+      if (!isChildElement) {
+        isButtonOpen.value = false
+      }
+    }
+  })
+})
 </script>
 
 <style scoped></style>

@@ -1,12 +1,10 @@
+import { ElectronAPI } from '@electron-toolkit/preload'
 export interface IElectronAPI {
-  node: () => string
-  chrome: () => string
-  electron: () => string
-  exposeDev: () => Promise<string>
-  getGeolocation: () => GeolocationPosition
+  setTitle: (value: string) => void
 }
 declare global {
   interface Window {
+    electron: ElectronAPI
     iElectronApi: IElectronAPI
   }
 }

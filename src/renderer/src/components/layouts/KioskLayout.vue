@@ -2,7 +2,7 @@
   <!-- layout -->
   <div
     :class="isMain ? 'bg-dark_24' : 'bg-white_ff'"
-    class="relative w-full min-w-[67.5rem] min-h-screen overflow-hidden"
+    class="relative w-full min-w-[67.5rem] h-full min-h-screen overflow-hidden z-[99]"
   >
     <!-- ---------------- header ---------------- -->
     <header
@@ -11,7 +11,7 @@
     >
       <h1
         :class="isMain ? 'pt-[4.795rem]' : 'abb-bar-title flex items-center justify-center'"
-        class="h-full ml-[3.25rem]"
+        class="h-full mx-[3.25rem]"
       >
         <template v-if="isMain"><SvgIcon :icon="EtcIconType.Logo" /></template>
         <template v-else> {{ appBarTitle }} </template>
@@ -22,10 +22,7 @@
       </div>
     </header>
     <!-- ---------------- contents ---------------- -->
-    <main
-      class="relative pt-[13.5rem] border-4 border-indigo-500"
-      :class="isMain ? '' : 'pb-[12.75rem]'"
-    >
+    <main class="relative mt-[13.5rem]" :class="isMain ? '' : 'mb-[12.75rem]'">
       <!-- content -->
       <slot name="contents" />
     </main>
@@ -62,7 +59,11 @@
           <template v-for="item in bottomMavigation" :key="item.routeName">
             <li
               class="pt-[2.5662rem] transition-colors duration-300"
-              :class="route.name === item.routeName ? 'bg-[#4e5564] selected-tab-shadow' : ''"
+              :class="
+                route.path.split('/').slice(0, 2).join('/') === item.routePath
+                  ? 'bg-[#4e5564] selected-tab-shadow'
+                  : ''
+              "
               @click="routerPush(item)"
             >
               <div class="flex flex-col items-center">
@@ -75,15 +76,23 @@
                     leave-from-class="transform opacity-100"
                     leave-to-class="transform opacity-50"
                   >
-                    <SvgIcon :icon="item.icon" :is-selected="route.name === item.routeName" />
+                    <SvgIcon
+                      :icon="item.icon"
+                      :is-selected="route.path.split('/').slice(0, 2).join('/') === item.routePath"
+                    />
                   </Transition>
                 </div>
                 <div class="mt-3">
                   <span
                     class="bottom-nav-label"
-                    :class="route.name === item.routeName ? 'bottom-nav-label-selected' : ''"
-                    >{{ item.label }}</span
+                    :class="
+                      route.path.split('/').slice(0, 2).join('/') === item.routePath
+                        ? 'bottom-nav-label-selected'
+                        : ''
+                    "
                   >
+                    {{ item.label }}
+                  </span>
                 </div>
               </div>
             </li>
@@ -118,14 +127,13 @@ withDefaults(defineProps<LayoutProps>(), {
 
 const route = useRoute()
 const router = useRouter()
-
 /*
 |----------------------------------------------------------------------------------------------------
 | Router Push
 |----------------------------------------------------------------------------------------------------
 */
 function routerPush(item: NavigationType): void {
-  router.push({ name: item.routeName })
+  router.push({ path: item.routePath })
   setAppBarTitle(item.label)
 }
 /*
@@ -146,6 +154,7 @@ const setAppBarTitle: SetAppBarTitle = (label) => {
 interface NavigationType {
   label: string
   routeName: RouteRecordName
+  routePath: string
   icon: NavigationIconType | MainNavigationIconType
 }
 /*
@@ -158,31 +167,37 @@ const mainMavigation: MainNavigatoinRecord = {
   search: {
     label: '검색',
     routeName: 'search',
+    routePath: '/search',
     icon: MainNavigationIconType.MainMagnifying
   },
   shop: {
     label: '점포 안내',
     routeName: 'store',
+    routePath: '/store',
     icon: MainNavigationIconType.MainStore
   },
   food: {
     label: '맛집 안내',
     routeName: 'food',
+    routePath: '/food',
     icon: MainNavigationIconType.MainFood
   },
   facility: {
     label: '편의 시설',
     routeName: 'facility',
+    routePath: '/facility',
     icon: MainNavigationIconType.MainFacility
   },
   talk: {
     label: '부안 톡톡',
     routeName: 'talk',
+    routePath: '/talk',
     icon: MainNavigationIconType.MainTalk
   },
   event: {
     label: '이벤트',
     routeName: 'event',
+    routePath: '/event',
     icon: MainNavigationIconType.MainEvent
   }
 }
@@ -196,36 +211,43 @@ const bottomMavigation: BottomNavigatoinRecord = {
   home: {
     label: '홈',
     routeName: 'home',
+    routePath: '/',
     icon: NavigationIconType.Home
   },
   search: {
     label: '검색',
     routeName: 'search',
+    routePath: '/search',
     icon: NavigationIconType.Magnifying
   },
   shop: {
     label: '점포 안내',
     routeName: 'store',
+    routePath: '/store',
     icon: NavigationIconType.Store
   },
   food: {
     label: '맛집 안내',
     routeName: 'food',
+    routePath: '/food',
     icon: NavigationIconType.Food
   },
   facility: {
     label: '편의 시설',
     routeName: 'facility',
+    routePath: '/facility',
     icon: NavigationIconType.Facility
   },
   talk: {
     label: '부안 톡톡',
     routeName: 'talk',
+    routePath: '/talk',
     icon: NavigationIconType.Talk
   },
   event: {
     label: '이벤트',
-    routeName: 'event',
+    routeName: '/event',
+    routePath: '/event',
     icon: NavigationIconType.Event
   }
 }

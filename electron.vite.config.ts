@@ -13,11 +13,14 @@ export default defineConfig({
   renderer: {
     resolve: {
       alias: {
-        '@renderer': resolve(__dirname, './src/renderer/src'),
-        '@typings': resolve(__dirname, './src/typings')
+        '@renderer': resolve(__dirname, './src/renderer/src')
       }
     },
-
+    build: {
+      rollupOptions: {
+        external: ['src/assets/videos/video_example1.mp4']
+      }
+    },
     plugins: [vue(), svgLoader()]
   }
 })

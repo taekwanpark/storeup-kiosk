@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/render/srcindex.html', './src/**/*.{js,ts,jsx,tsx,vue}'],
+  content: ['./src/render/src/index.html', './src/**/*.{js,ts,jsx,tsx,vue}'],
   theme: {
     extend: {
       fontFamily: {
@@ -49,6 +49,7 @@ export default {
         k8: '2rem',
         'k7.5': '1.875rem',
         k7: '1.75rem',
+        'k6.5': '1.625rem',
         k6: '1.5rem',
         'k5.5': '1.375rem',
         k5: '1.25rem',

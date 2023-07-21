@@ -36,8 +36,8 @@
             <SvgIcon :icon="EtcIconType.Contact" />
             <p class="card-information">{{ contact }}</p>
           </div>
-          <!-- contact -->
-          <div class="flex space-x-2">
+          <!-- fee -->
+          <div v-if="fee" class="flex space-x-2">
             <SvgIcon :icon="EtcIconType.Cash" />
             <p class="card-information">{{ fee }}</p>
           </div>
@@ -60,7 +60,7 @@
     ------------------------------------------------------------------------ -->
     <div class="w-[15.625rem] h-[11.375rem] ml-[3.75rem] flex-none border">
       <img
-        :src="'src/assets/' + thumbnail"
+        :src="'/src/assets/' + thumbnail"
         alt="example1"
         class="object-cover object-center w-full h-full"
       />

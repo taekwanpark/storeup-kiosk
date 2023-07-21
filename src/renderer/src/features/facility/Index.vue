@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <!-- chip buttons -->
-    <div class="absolute mt-8 mx-13">
+    <div class="fixed mt-8 mx-13">
       <ul class="flex gap-x-6">
         <template v-for="(item, index) in shopChipIcons" :key="index">
           <li @click="selectChip(index)">
@@ -16,31 +16,31 @@
       </ul>
     </div>
     <!--  -->
-    <div class="bg-gray-200 w-full">a</div>
-  </div>
-  <!-- card list -->
-  <div
-    id="card-container-shadow"
-    class="fixed inset-x-0 bottom-[12.75rem] w-full min-w-[67.5rem] bg-white_ff rounded-t-[3.125rem]"
-  >
-    <ul class="mx-8 mt-13 flex flex-col gap-y-[2.25rem] max-h-[38rem] overflow-auto">
-      <template v-for="(store, index) in stores" :key="index">
-        <li :class="index === stores.length - 1 ? 'pb-13' : ''" class="px-5">
-          <MapCardItem
-            :store-name="store.storeName"
-            :store-status="store.storeStatus"
-            :category="store.category"
-            :thumbnail="store.thumbnail"
-            :address="store.address"
-            :distance="store.distance"
-            :contact="store.contact"
-            :opening-hours="store.openingHours"
-            :fee="store.fee"
-          />
-        </li>
-        <hr v-if="index !== stores.length - 1" class="border-[#e5e5e5]" />
-      </template>
-    </ul>
+    <div class="bg-gray-200 w-full h-screen"></div>
+    <!-- card list -->
+    <div
+      id="card-container-shadow"
+      class="fixed inset-x-0 bottom-[12.75rem] w-full min-w-[67.5rem] bg-white_ff rounded-t-[3.125rem]"
+    >
+      <ul class="mx-8 mt-13 flex flex-col gap-y-[2.25rem] max-h-[38rem] overflow-auto">
+        <template v-for="(store, index) in stores" :key="index">
+          <li :class="index === stores.length - 1 ? 'pb-13' : ''" class="px-5">
+            <MapCardItem
+              :store-name="store.storeName"
+              :store-status="store.storeStatus"
+              :category="store.category"
+              :thumbnail="store.thumbnail"
+              :address="store.address"
+              :distance="store.distance"
+              :contact="store.contact"
+              :opening-hours="store.openingHours"
+              :fee="store.fee"
+            />
+          </li>
+          <hr v-if="index !== stores.length - 1" class="border-[#e5e5e5]" />
+        </template>
+      </ul>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

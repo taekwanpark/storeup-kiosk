@@ -67,7 +67,7 @@ interface StoreStatusStyle {
 type StoreStatusRecord = Record<StoreStatusKeys, StoreStatusStyle>
 export const storeStatusStyle: StoreStatusRecord = {
   [StoreStatusTypes.Open]: {
-    textColor: 'text-[#127200]',
+    textColor: 'text-[#179600]',
     text: '영업중'
   },
   [StoreStatusTypes.Close]: {

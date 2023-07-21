@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 function createWindow(): void {
   process.env.GOOGLE_API_KEY = 'AIzaSyBkHHVvy-OiH_bzZFmEzrx2oYqod9Epapo'
   // Create the browser window.
@@ -63,8 +64,7 @@ function createWindow(): void {
   | Single Page [??]
   |----------------------------------------------------------------
   */
-  console.log(is)
-  console.log(process.env['ELECTRON_RENDERER_URL'])
+
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     console.log('############ [SINGLE PAGE: DEV] ############')
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
@@ -117,6 +117,9 @@ app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.storeup-kiosk')
 
+  // for kakao map
+  process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
@@ -168,14 +171,11 @@ app.on('window-all-closed', () => {
 // code. You can also put them in separate files and require them here.
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function ipcHandler(): void {
-  //------------------------------------------------------------------------
-  // test
-  ipcMain.handle('ipc-invoke-dev', () => 'this is preload: invoke -> main: handle')
-  //------------------------------------------------------------------------
-  // ipcMain.handle('get-geolocation-api', (_, arguments) => arguments)
-  //------------------------------------------------------------------------
+  console.log('############ [ipcHandler] ############')
+
+  ipcMain.on('set-title', handleSetTitle)
+
   ipcMain.on('request-location-permission', (event) => {
     // 사용자에게 위치 권한을 요청하는 로직을 구현합니다.
     // 예를 들어, 다이얼로그를 표시하여 사용자에게 권한 요청을 보여줄 수 있습니다.
@@ -186,4 +186,10 @@ function ipcHandler(): void {
     // 위치 권한을 거부한 경우
     // event.reply('location-permission-denied');
   })
+}
+
+function handleSetTitle(event, title): void {
+  const webContents = event.sender
+  const win = BrowserWindow.fromWebContents(webContents)
+  win!.setTitle(title)
 }

@@ -86,5 +86,12 @@ module.exports = {
 #### Virtual Keyboard
 
 ```javascript
+// For virtual-keyboard
 $ npm i simple-keyboard
+
+// For Language Layouts
+$ npm install simple-keyboard-layouts --save
+
+// For Korean Char Assemble
+$ npm install hangul-js
 ```

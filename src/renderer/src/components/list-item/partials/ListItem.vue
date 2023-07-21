@@ -8,7 +8,7 @@
         <!-- thumbnail -->
         <div class="w-full h-full">
           <img
-            :src="'src/assets/' + thumbnail"
+            :src="'/src/assets/' + thumbnail"
             alt="example1"
             class="object-cover object-center w-full h-full"
           />
@@ -76,7 +76,6 @@
 <script setup lang="ts">
 import { Ref, onMounted, ref } from 'vue'
 // type
-import '@typings/renderer.d.ts'
 import { EtcIconType } from '@renderer/components/icon/types'
 import {
   ListItemTypes,

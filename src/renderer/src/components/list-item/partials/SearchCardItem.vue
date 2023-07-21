@@ -5,7 +5,7 @@
     ------------------------------------------------------------------------ -->
     <div class="w-100 h-68 flex-none border">
       <img
-        :src="'src/assets/' + thumbnail"
+        :src="'/src/assets/' + thumbnail"
         alt="example1"
         class="object-cover object-center w-full h-full"
       />

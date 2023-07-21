@@ -5,9 +5,9 @@
       style="width: 100%"
       autoplay="true"
       loop="true"
-      src="src/assets/videos/video_example1.mp4"
+      src="/src/assets/videos/video_example1.mp4"
     >
-      <source src="src/assets/videos/video_example1.mp4" type="video/webm" />
+      <source src="/src/assets/videos/video_example1.mp4" type="video/webm" />
     </video>
   </div>
 </template>
