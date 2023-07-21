@@ -15,10 +15,7 @@
         </template>
       </ul>
     </div>
-    <div class="relative">
-      <!-- map -->
-      <div id="kakao-map" class="w-full"></div>
-    </div>
+    <KioskMap />
     <!-- bottom container -->
     <div class="fixed inset-x-0 bottom-[12.75rem] z-50">
       <div class="relative">
@@ -67,7 +64,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { Ref, nextTick, onMounted, ref } from 'vue'
+import { Ref, ref } from 'vue'
 // type
 import { MapChipType, MapIconType } from '@renderer/components/icon/types'
 import type { MapChipProps } from '@renderer/components/buttons/chip-button/ChipButton.vue'
@@ -77,7 +74,12 @@ import ChipButton from '@renderer/components/buttons/chip-button/ChipButton.vue'
 import MapCardItem from '@renderer/components/list-item/partials/MapCardItem.vue'
 // vue
 import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
+import KioskMap from '@renderer/components/map/KioskMap.vue'
 
+// lib
+import { useMap } from '@renderer/libs/useMap'
+
+const { zoomIn, zoomOut, moveToDefault } = useMap()
 const stores = [
   {
     storeName: '철이네 생선 가게',
@@ -110,163 +112,6 @@ const stores = [
   //   openingHours: '월~토 09:00-18:00 매주 일요일 정기휴무'
   // }
 ]
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map
-|----------------------------------------------------------------------------------------------------
-*/
-onMounted(async () => {
-  setKakaoHeight()
-  await nextTick(() => {
-    loadKakao()
-  })
-})
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map Container Height
-|----------------------------------------------------------------------------------------------------
-*/
-function setKakaoHeight(): void {
-  const marginTop = 13.5
-  const marginBottom = 12.75
-  const currentScreenHeight = window.innerHeight / 16
-  const mapHeight = currentScreenHeight - marginBottom - marginTop
-  const mapContainer: HTMLElement | null = document.getElementById('kakao-map')
-  if (mapContainer !== null) {
-    mapContainer.style.height = `${mapHeight}rem`
-  }
-}
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map Script Load
-|----------------------------------------------------------------------------------------------------
-*/
-let map
-let defaultPosition
-function loadKakao(): void {
-  if (!window.kakao || !window.kakao.maps) {
-    const kakaoMap = document.createElement('script')
-    kakaoMap.setAttribute(
-      'src',
-      'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f55b67d7a842ed5762627813914ffae4'
-    )
-    document.head.appendChild(kakaoMap)
-
-    kakaoMap.addEventListener('load', () => {
-      console.log('### KAKAO ### - Loaded')
-      kakao.maps.load(mapInit)
-    })
-  } else {
-    console.log('### KAKAO ### - Already Loaded')
-    mapInit()
-  }
-}
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map init
-|----------------------------------------------------------------------------------------------------
-*/
-function mapInit(): void {
-  const container: HTMLElement | null = document.getElementById('kakao-map')
-
-  if (container !== null) {
-    defaultPosition = new kakao.maps.LatLng(35.147707, 129.058673)
-
-    const options = {
-      center: defaultPosition,
-      level: 1
-    }
-
-    map = new kakao.maps.Map(container, options)
-
-    new kakao.maps.Marker({
-      title: '현재 위치',
-      map: map,
-      position: defaultPosition
-    })
-  }
-}
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map move to default
-|----------------------------------------------------------------------------------------------------
-*/
-function moveToDefault(): void {
-  map.panTo(defaultPosition)
-}
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map Zoom In
-|----------------------------------------------------------------------------------------------------
-*/
-function zoomIn(): void {
-  // 현재 지도의 레벨을 얻어옵니다
-  const level = map.getLevel()
-
-  // 지도를 1레벨 내립니다 (지도가 확대됩니다)
-  map.setLevel(level - 1, { animate: true })
-
-  // 지도 레벨을 표시합니다
-  displayLevel()
-}
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map Zoom Out
-|----------------------------------------------------------------------------------------------------
-*/
-function zoomOut(): void {
-  // 현재 지도의 레벨을 얻어옵니다
-  const level = map.getLevel()
-
-  // 지도를 1레벨 올립니다 (지도가 축소됩니다)
-  map.setLevel(level + 1, { animate: true })
-
-  // 지도 레벨을 표시합니다
-  displayLevel()
-}
-
-/*
-|----------------------------------------------------------------------------------------------------
-| kakao map display Level
-|----------------------------------------------------------------------------------------------------
-*/
-function displayLevel(): void {
-  const levelEl = document.getElementById('maplevel')
-  if (levelEl !== null) levelEl.innerHTML = '현재 지도 레벨은 ' + map.getLevel() + ' 레벨 입니다.'
-}
-/*
-|----------------------------------------------------------------------------------------------------
-| get current position
-|----------------------------------------------------------------------------------------------------
-*/
-
-// function getCurrentPosition(): void {
-//   navigator.geolocation.getCurrentPosition(
-//     (position) => {
-//       currentPosition.value.fromLat = position.coords.latitude
-//       currentPosition.value.fromLon = position.coords.longitude
-//       const moveLatLon = new kakao.maps.LatLng(35.147707, 129.058673)
-
-//       const marker = new kakao.maps.Marker({
-//         position: moveLatLon
-//       })
-//       marker.setMap(map)
-//       map.setCenter(moveLatLon)
-
-//       console.log(
-//         `Latitude: ${currentPosition.value.fromLat}, Longitude: ${currentPosition.value.fromLon}`
-//       )
-//     },
-//     (error) => {
-//       console.error(`Error retrieving geolocation: ${error.message}`)
-//     }
-//   )
-// }
 /*
 |----------------------------------------------------------------------------------------------------
 | Select Chip
