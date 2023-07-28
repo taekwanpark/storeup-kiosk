@@ -2,22 +2,23 @@
   <div class="relative">
     <div class="fixed top-[13.5rem] inset-x-0 min-w-[67.5rem] pt-8.5 bg-white_ff">
       <!-- input conatiner -->
-      <SearchInputForm />
+      <SearchInputBox ref="searchInputBoxRef" />
       <!-- recommandation container -->
-      <div class="my-12 mx-13">
-        <!-- <span class="text-k7 font-semibold tracking-[-0.53px] text-dark_24">추천 검색어</span> -->
-        <span class="text-k7 font-semibold tracking-[-0.53px] text-dark_24">검색 결과 (1건)</span>
+      <div v-if="searchInputBoxRef?.isFocused" class="mt-12 mb-4 mx-13">
+        <span class="text-k7.5 font-semibold tracking-[-0.53px] text-dark_24">검색 결과 (3건)</span>
+      </div>
+      <div v-else class="my-12 mx-13">
+        <span class="text-k7 font-semibold tracking-[-0.53px] text-dark_24">추천 검색어</span>
+        <div class="mt-6 flex gap-6 flex-wrap">
+          <template v-for="label in ['주차장', '전기차 충전소', '화장실']" :key="label">
+            <RecommendedItems :label="label" />
+          </template>
+        </div>
       </div>
     </div>
-
     <!-- list -->
-    <!-- <div class="mt-6 flex gap-6 flex-wrap">
-      <template v-for="label in ['주차장', '전기차 충전소', '화장실']" :key="label">
-        <SearchRecommandItem :label="label" />
-      </template>
-    </div> -->
-    <div class="mt-[16.25rem]">
-      <ul class="">
+    <div v-if="searchInputBoxRef?.isFocused" class="pt-[14.25rem]">
+      <ul>
         <template v-for="item in list" :key="item.queryString">
           <li>
             <SearchItem
@@ -45,6 +46,7 @@
 
 <script setup lang="ts">
 import { Ref, provide, ref } from 'vue'
+
 // type
 import {
   getListItemType,
@@ -52,11 +54,14 @@ import {
   TabItemKey,
   TabItem
 } from '@renderer/components/list-item/types'
+
 // vue
 import SearchItem from '@renderer/components/list-item/SearchItem.vue'
-import SearchInputForm from '@renderer/features/search/partials/SearchInputForm.vue'
+import SearchInputBox from '@renderer/features/search/partials/SearchInputBox.vue'
+import RecommendedItems from '@renderer/features/search/partials/RecommendedItems.vue'
 
-// import SearchRecommandItem from '@renderer/features/search/partials/SearchRecommandItem.vue'
+const searchInputBoxRef: Ref<InstanceType<typeof SearchInputBox> | null> = ref(null)
+
 /*
 |----------------------------------------------------------------------------------------------------
 | Tab Item

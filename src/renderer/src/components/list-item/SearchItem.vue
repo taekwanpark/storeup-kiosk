@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 // vue
-import ListItem, { ListItemProps } from '@renderer/components/list-item/partials/ListItem.vue'
+import ListItem, { ListItemProps } from '@renderer/components/list-item/ListItem.vue'
 import SearchCardItem, {
   SearchCardItemProps
 } from '@renderer/components/list-item/partials/SearchCardItem.vue'

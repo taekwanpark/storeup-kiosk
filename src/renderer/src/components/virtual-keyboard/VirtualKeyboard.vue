@@ -30,7 +30,7 @@ const emits = defineEmits<{
 |------------------------------------------------------------------------------------------
 */
 // keyboardRef 변수를 ref()로 감싸주고 타입을 지정합니다.
-const keyboardRef: Ref<Keyboard | null> = ref(null)
+const keyboardElement: Ref<Keyboard | null> = ref(null)
 
 const display = {
   '{alt}': '123',
@@ -171,12 +171,12 @@ function pressVirtualKey(button: string): void {
 | Clear Input
 |------------------------------------------------------------------------------------------
 */
-defineExpose({ clearVirtualInput })
 function clearVirtualInput(): void {
   console.log('Clear input')
-  if (keyboardRef.value !== null && keyboardRef.value !== undefined) keyboardRef.value.clearInput()
+  if (keyboardElement.value !== null && keyboardElement.value !== undefined)
+    keyboardElement.value.clearInput()
 }
-
+defineExpose({ clearVirtualInput })
 /*
 |------------------------------------------------------------------------------------------
 | Handle Shift Key
@@ -184,8 +184,8 @@ function clearVirtualInput(): void {
 */
 const currentLang: Ref<string> = ref('ko')
 function handleShift(button: string): void {
-  if (keyboardRef.value !== null) {
-    const currentLayout = keyboardRef.value.options.layoutName
+  if (keyboardElement.value !== null) {
+    const currentLayout = keyboardElement.value.options.layoutName
     let layoutName: string | undefined
 
     switch (button) {
@@ -193,13 +193,13 @@ function handleShift(button: string): void {
         if (currentLang.value === 'ko') {
           layoutName = 'english'
           currentLang.value = 'en'
-          keyboardRef.value.setOptions({
+          keyboardElement.value.setOptions({
             display: displayEn
           })
         } else {
           layoutName = 'default'
           currentLang.value = 'ko'
-          keyboardRef.value.setOptions({
+          keyboardElement.value.setOptions({
             display: display
           })
         }
@@ -234,7 +234,7 @@ function handleShift(button: string): void {
     }
 
     if (typeof layoutName !== 'undefined') {
-      keyboardRef.value.setOptions({
+      keyboardElement.value.setOptions({
         layoutName: layoutName
       })
     }
@@ -247,7 +247,7 @@ function handleShift(button: string): void {
 |------------------------------------------------------------------------------------------
 */
 onMounted(() => {
-  keyboardRef.value = new Keyboard('.simple-keyboard', {
+  keyboardElement.value = new Keyboard('.simple-keyboard', {
     onChange: (input: string): void => updateVirtualInput(input),
     onKeyPress: (button: string): void => pressVirtualKey(button),
     theme: 'hg-theme-default hg-layout-default myTheme',
@@ -278,7 +278,7 @@ onMounted(() => {
       // click event target이 inputContainer에 속하지 않고, keyboard에도 속하지 않을 경우 dismiss
       if (!isChildElement && !isKeyboard) {
         emits('focus:input', false)
-        keyboardRef.value && keyboardRef.value.destroy()
+        keyboardElement.value && keyboardElement.value.destroy()
       }
     }
   })

@@ -9,8 +9,9 @@ import { onMounted } from 'vue'
 // lib
 import { heightAdjustHandler } from '@renderer/libs/useHeightAdjustHandler'
 // type
-import { SearchRecommandItemProps } from '@renderer/features/search/types'
-
+interface SearchRecommandItemProps {
+  label: string
+}
 defineProps<SearchRecommandItemProps>()
 /*
 |----------------------------------------------------------------------------------------------------

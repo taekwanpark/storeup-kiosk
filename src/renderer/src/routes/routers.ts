@@ -46,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'event-list',
-        component: () => import('@renderer/features/event/partials/EventList.vue')
+        component: () => import('@renderer/features/event/Event.vue')
         // meta: { transition: 'slide-left' }
       },
       {

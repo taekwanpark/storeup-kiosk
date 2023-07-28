@@ -4,7 +4,9 @@ interface UseMapType {
   zoomIn: () => void
   zoomOut: () => void
 }
-
+/**
+ * @deprecated
+ */
 export function useMap(): UseMapType {
   /*
 |----------------------------------------------------------------------------------------------------
@@ -49,7 +51,7 @@ export function useMap(): UseMapType {
       }
 
       map = new kakao.maps.Map(container, options)
-      console.log(map)
+
       new kakao.maps.Marker({
         title: '현재 위치',
         map: map,

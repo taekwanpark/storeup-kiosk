@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <!-- chip buttons -->
-    <div class="fixed mt-8 mx-13">
+    <div class="fixed mt-8 mx-13 z-50">
       <ul class="flex gap-x-6">
         <template v-for="(item, index) in shopChipIcons" :key="index">
           <li @click="selectChip(index)">
@@ -15,25 +15,15 @@
         </template>
       </ul>
     </div>
-    <KioskMap />
+    <KioskMap ref="kioskMapRef" :initial-position="initialPosition" />
     <!-- bottom container -->
     <div class="fixed inset-x-0 bottom-[12.75rem] z-50">
-      <div class="relative">
-        <div class="absolute bottom-6 left-2 flex flex-col">
-          <button @click="zoomIn">
-            <SvgIcon :icon="MapIconType.PlusShadow" />
-          </button>
-          <button @click="zoomOut">
-            <SvgIcon :icon="MapIconType.MinusShadow" />
-          </button>
-        </div>
-        <div class="absolute bottom-6 right-2">
-          <button @click="moveToDefault">
-            <SvgIcon :icon="MapIconType.CurrentPointerShadow" />
-          </button>
-        </div>
-      </div>
-
+      <!-- map controller -->
+      <KioskMapBottomController
+        :zoom-in="kioskMapRef?.zoomIn"
+        :zoom-out="kioskMapRef?.zoomOut"
+        :move-to-default="kioskMapRef?.moveToDefault"
+      />
       <!-- card list -->
       <div
         id="card-container-shadow"
@@ -66,20 +56,19 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
 // type
-import { MapChipType, MapIconType } from '@renderer/components/icon/types'
+import { MapChipType } from '@renderer/components/icon/types'
 import type { MapChipProps } from '@renderer/components/buttons/chip-button/ChipButton.vue'
 import { storeStatusType } from '@renderer/components/list-item/types'
 // vue
 import ChipButton from '@renderer/components/buttons/chip-button/ChipButton.vue'
-import MapCardItem from '@renderer/components/list-item/partials/MapCardItem.vue'
-// vue
-import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
+import MapCardItem from '@renderer/components/list-item/MapCardItem.vue'
 import KioskMap from '@renderer/components/map/KioskMap.vue'
+import KioskMapBottomController from '@renderer/components/map/KioskMapBottomController.vue'
 
-// lib
-import { useMap } from '@renderer/libs/useMap'
+export type KioskMapRef = InstanceType<typeof KioskMap> | undefined
+const kioskMapRef: Ref<KioskMapRef> = ref(undefined)
+const initialPosition: Ref<{ lat: number; lng: number }> = ref({ lat: 35.147707, lng: 129.058673 })
 
-const { zoomIn, zoomOut, moveToDefault } = useMap()
 const stores = [
   {
     storeName: '철이네 생선 가게',

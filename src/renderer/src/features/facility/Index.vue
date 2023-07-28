@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <!-- chip buttons -->
-    <div class="fixed mt-8 mx-13">
+    <div class="fixed mt-8 mx-13 z-50">
       <ul class="flex gap-x-6">
         <template v-for="(item, index) in shopChipIcons" :key="index">
           <li @click="selectChip(index)">
@@ -16,30 +16,42 @@
       </ul>
     </div>
     <!--  -->
-    <div class="bg-gray-200 w-full h-screen"></div>
-    <!-- card list -->
-    <div
-      id="card-container-shadow"
-      class="fixed inset-x-0 bottom-[12.75rem] w-full min-w-[67.5rem] bg-white_ff rounded-t-[3.125rem]"
-    >
-      <ul class="mx-8 mt-13 flex flex-col gap-y-[2.25rem] max-h-[38rem] overflow-auto">
-        <template v-for="(store, index) in stores" :key="index">
-          <li :class="index === stores.length - 1 ? 'pb-13' : ''" class="px-5">
-            <MapCardItem
-              :store-name="store.storeName"
-              :store-status="store.storeStatus"
-              :category="store.category"
-              :thumbnail="store.thumbnail"
-              :address="store.address"
-              :distance="store.distance"
-              :contact="store.contact"
-              :opening-hours="store.openingHours"
-              :fee="store.fee"
-            />
-          </li>
-          <hr v-if="index !== stores.length - 1" class="border-[#e5e5e5]" />
-        </template>
-      </ul>
+    <KioskMap ref="kioskMapRef" :initial-position="initialPosition" />
+    <!-- bottom container -->
+    <div class="fixed inset-x-0 bottom-[12.75rem] z-50">
+      <!-- map controller -->
+      <KioskMapBottomController
+        :zoom-in="kioskMapRef?.zoomIn"
+        :zoom-out="kioskMapRef?.zoomOut"
+        :move-to-default="kioskMapRef?.moveToDefault"
+      />
+      <!-- card list -->
+      <div
+        id="card-container-shadow"
+        class="w-full min-w-[67.5rem] bg-white_ff rounded-t-[3.125rem]"
+      >
+        <ul class="mx-8 flex flex-col gap-y-[2.25rem] max-h-[40rem] overflow-auto">
+          <template v-for="(store, index) in stores" :key="index">
+            <li
+              :class="[index === stores.length - 1 ? 'mb-13' : '', index === 0 ? 'mt-13' : '']"
+              class="px-5"
+            >
+              <MapCardItem
+                :store-name="store.storeName"
+                :store-status="store.storeStatus"
+                :category="store.category"
+                :thumbnail="store.thumbnail"
+                :address="store.address"
+                :distance="store.distance"
+                :contact="store.contact"
+                :opening-hours="store.openingHours"
+                :fee="store.fee"
+              />
+            </li>
+            <hr v-if="index !== stores.length - 1" class="border-[#e5e5e5]" />
+          </template>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -48,10 +60,16 @@ import { Ref, ref } from 'vue'
 // type
 import { MapChipType } from '@renderer/components/icon/types'
 import type { MapChipProps } from '@renderer/components/buttons/chip-button/ChipButton.vue'
+import { storeStatusType } from '@renderer/components/list-item/types'
 // vue
 import ChipButton from '@renderer/components/buttons/chip-button/ChipButton.vue'
-import MapCardItem from '@renderer/components/list-item/partials/MapCardItem.vue'
-import { storeStatusType } from '@renderer/components/list-item/types'
+import MapCardItem from '@renderer/components/list-item/MapCardItem.vue'
+import KioskMap from '@renderer/components/map/KioskMap.vue'
+import KioskMapBottomController from '@renderer/components/map/KioskMapBottomController.vue'
+
+export type KioskMapRef = InstanceType<typeof KioskMap> | undefined
+const kioskMapRef: Ref<KioskMapRef> = ref(undefined)
+const initialPosition: Ref<{ lat: number; lng: number }> = ref({ lat: 35.147707, lng: 129.058673 })
 
 const stores = [
   {

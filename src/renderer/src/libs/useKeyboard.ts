@@ -1,13 +1,14 @@
 import { Ref, ref } from 'vue'
-// vue
+//vue
 import VirtualKeyboard from '@renderer/components/virtual-keyboard/VirtualKeyboard.vue'
 
-export type KeyboardRefType = InstanceType<typeof VirtualKeyboard> | undefined
+type KeyboardRef = InstanceType<typeof VirtualKeyboard> | null
 
 interface KeyboardReturn {
   focusInput: (value: boolean) => void
   updateInput: (value: string) => void
-  clearInput: (ref: KeyboardRefType) => void
+  clearInput: (fn?: () => void | undefined) => void
+  keyboardRef: Ref<KeyboardRef>
   inputValue: Ref<string>
   isFocused: Ref<boolean>
 }
@@ -15,7 +16,7 @@ interface KeyboardReturn {
 export function useKeyboard(): KeyboardReturn {
   const isFocused: Ref<boolean> = ref(false)
   const inputValue: Ref<string> = ref('')
-
+  const keyboardRef: Ref<KeyboardRef> = ref(null)
   /*
   |------------------------------------------------------------------------------------------
   | Detect Input Focused
@@ -25,7 +26,7 @@ export function useKeyboard(): KeyboardReturn {
     console.log('### useKeyboard ### - focusInput', value)
 
     isFocused.value = value
-    blinkCursor(value)
+    // blinkCursor(value)
     // 종료되는 method 필요
   }
 
@@ -45,20 +46,18 @@ export function useKeyboard(): KeyboardReturn {
   | Clear Input
   |------------------------------------------------------------------------------------------
   */
-  const clearInput: KeyboardReturn['clearInput'] = (ref) => {
-    if (ref !== null && ref !== undefined) {
-      console.log('### useKeyboard ### - clearInput')
+  const clearInput: KeyboardReturn['clearInput'] = (fn) => {
+    console.log('### useKeyboard ### - clearInput')
 
-      inputValue.value = ''
-      // exposed function from Virtual Keyboard
-      ref.clearVirtualInput()
-    }
+    inputValue.value = ''
+    if (fn !== undefined) fn()
   }
 
   return {
     focusInput,
     updateInput,
     clearInput,
+    keyboardRef,
     inputValue,
     isFocused
   }
@@ -72,7 +71,12 @@ export function useKeyboard(): KeyboardReturn {
 | value = input focused or not
 |
 */
-function blinkCursor(value: boolean): void {
+/**
+ *
+ * @deprecated
+ *
+ */
+/* function blinkCursor(value: boolean): void {
   console.log('blink')
 
   // 스타일 규칙을 생성하여 스타일시트에 추가
@@ -120,3 +124,4 @@ function blinkCursor(value: boolean): void {
     return
   }
 }
+ */

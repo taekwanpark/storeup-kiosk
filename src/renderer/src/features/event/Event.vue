@@ -37,31 +37,22 @@
         />
       </div>
     </div>
-    <div class="mt-32 mb-[12.75rem]">
-      <template v-if="eventStatusTab === getEventStatusType('Ongoing')">
-        <template v-for="item in list" :key="item.id">
-          <ListItem
-            :id="item.id"
-            :title="item.title"
-            :caption="item.caption"
-            :thumbnail="item.thumbnail"
-            :list-item-type="item.listItemType"
-          />
-          <hr class="mx-13 border-[#c0c2c4]" />
-        </template>
-      </template>
-      <template v-if="eventStatusTab === getEventStatusType('Ended')">
-        <template v-for="item in list" :key="item.id">
-          <ListItem
-            :id="item.id"
-            :title="item.title"
-            :caption="item.caption"
-            :thumbnail="item.thumbnail"
-            :list-item-type="item.listItemType"
-            :event-status-type="item.eventStatusType"
-          />
-          <hr class="mx-13 border-[#c0c2c4]" />
-        </template>
+
+    <div class="pt-32 mb-[12.75rem]">
+      <template v-for="item in list" :key="item.id">
+        <transition name="fade">
+          <div v-if="item.eventStatusType === eventStatusTab">
+            <ListItem
+              :id="item.id"
+              :title="item.title"
+              :caption="item.caption"
+              :thumbnail="item.thumbnail"
+              :list-item-type="item.listItemType"
+              :event-status-type="item.eventStatusType"
+            />
+            <hr class="mx-13 border-[#c0c2c4]" />
+          </div>
+        </transition>
       </template>
     </div>
     <!-- pagination -->
@@ -83,7 +74,7 @@ import { TabItemKey, TabItem } from '@renderer/components/list-item/types'
 import { heightAdjustHandler } from '@renderer/libs/useHeightAdjustHandler'
 
 // vue
-import ListItem from '@renderer/components/list-item/partials/ListItem.vue'
+import ListItem from '@renderer/components/list-item/ListItem.vue'
 import Pagination from '@renderer/components/Pagination.vue'
 const router = useRouter()
 
@@ -109,10 +100,10 @@ const list = [
   {
     id: '0',
     listItemType: getListItemType('Event'),
-    title: '부안군 정보화 농업인 연구회를 개최합니다. 2023년 6월 ~',
+    title: '부안군 정보화 농업인 연구회를 . 2023년 6월 ~',
     caption: '2023.06.03 ~ 2023.06.06',
     thumbnail: 'example1.jpg',
-    eventStatusType: getEventStatusType('Ended')
+    eventStatusType: getEventStatusType('Ongoing')
   },
   {
     id: '1',

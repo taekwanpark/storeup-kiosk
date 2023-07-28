@@ -22,7 +22,7 @@
 
       <div
         class="absolute inset-y-0 right-6 my-auto w-fit h-fit rounded-full cursor-pointer"
-        @click="() => clearInput(virtualKeyboardRef)"
+        @click="() => clearInput(keyboardRef?.clearVirtualInput)"
       >
         <SvgIcon :icon="EtcIconType.InputDispose" />
       </div>
@@ -38,7 +38,7 @@
   </div>
   <VirtualKeyboard
     v-if="isFocused"
-    ref="virtualKeyboardRef"
+    ref="keyboardRef"
     input-container="input-container"
     @focus:input="focusInput"
     @update:input="updateInput"
@@ -48,27 +48,21 @@
 <script setup lang="ts">
 // type
 import { EtcIconType } from '@renderer/components/icon/types'
-import type { KeyboardRefType } from '@renderer/libs/useKeyboard'
+
 // vue
 import SvgIcon from '@renderer/components/icon/SvgIcon.vue'
 import VirtualKeyboard from '@renderer/components/virtual-keyboard/VirtualKeyboard.vue'
+
 // lib
 import { useKeyboard } from '@renderer/libs/useKeyboard'
-import { Ref, ref } from 'vue'
-
-/*
-|------------------------------------------------------------------------------------------
-| Keyboard Ref
-|------------------------------------------------------------------------------------------
-*/
-const virtualKeyboardRef: Ref<KeyboardRefType> = ref(undefined)
 
 /*
 |------------------------------------------------------------------------------------------
 | useKeyboard ts
 |------------------------------------------------------------------------------------------
 */
-const { focusInput, updateInput, clearInput, inputValue, isFocused } = useKeyboard()
+const { focusInput, updateInput, clearInput, keyboardRef, inputValue, isFocused } = useKeyboard()
+defineExpose({ isFocused })
 </script>
 
 <style scoped>
