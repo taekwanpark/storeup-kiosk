@@ -2,7 +2,7 @@
   <div class="relative">
     <div class="fixed top-[13.5rem] inset-x-0 min-w-[67.5rem] pt-8.5 bg-white_ff">
       <!-- input conatiner -->
-      <SearchInputBox ref="searchInputBoxRef" />
+      <SearchInputBox ref="searchInputBoxRef"/>
       <!-- recommandation container -->
       <div v-if="searchInputBoxRef?.isFocused" class="mt-12 mb-4 mx-13">
         <span class="text-k7.5 font-semibold tracking-[-0.53px] text-dark_24">검색 결과 (3건)</span>
@@ -11,7 +11,7 @@
         <span class="text-k7 font-semibold tracking-[-0.53px] text-dark_24">추천 검색어</span>
         <div class="mt-6 flex gap-6 flex-wrap">
           <template v-for="label in ['주차장', '전기차 충전소', '화장실']" :key="label">
-            <RecommendedItems :label="label" />
+            <RecommendedItems :label="label"/>
           </template>
         </div>
       </div>
@@ -21,21 +21,20 @@
       <ul>
         <template v-for="item in list" :key="item.queryString">
           <li>
-            <SearchItem
-              :id="item.id"
-              :is-open="item.id === currentItemIndex"
-              :list-item-type="getListItemType('Search')"
-              :title="item.title"
-              :query-string="item.queryString"
-              :caption="item.caption"
-              :caption-accent="item.captionAccent"
-              :thumbnail="item.thumbnail!"
-              :store-name="item.title"
-              :store-status="item.storeStatus"
-              :address="item.caption"
-              :contact="item.contact"
-              :fee="item.fee"
-              :opening-hours="item.openingHours"
+            <SearchItem :id="item.id"
+                        :address="item.caption"
+                        :caption="item.caption"
+                        :caption-accent="item.captionAccent"
+                        :contact="item.contact"
+                        :fee="item.fee"
+                        :is-open="item.id === currentItemIndex"
+                        :list-item-type="getListItemType('Search')"
+                        :opening-hours="item.openingHours"
+                        :query-string="item.queryString"
+                        :store-name="item.title"
+                        :store-status="item.storeStatus"
+                        :thumbnail="item.thumbnail!"
+                        :title="item.title"
             />
           </li>
         </template>
@@ -44,41 +43,48 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Ref, provide, ref } from 'vue'
-
+<script lang="ts" setup>
+import {Ref, provide, ref, InjectionKey} from 'vue'
 // type
 import {
   getListItemType,
-  storeStatusType,
-  TabItemKey,
-  TabItem
+  getStoreStatusType,
+  TabItemKey
 } from '@renderer/components/list-item/types'
-
 // vue
 import SearchItem from '@renderer/components/list-item/SearchItem.vue'
 import SearchInputBox from '@renderer/features/search/partials/SearchInputBox.vue'
 import RecommendedItems from '@renderer/features/search/partials/RecommendedItems.vue'
 
+
 const searchInputBoxRef: Ref<InstanceType<typeof SearchInputBox> | null> = ref(null)
 
-/*
-|----------------------------------------------------------------------------------------------------
-| Tab Item
-|----------------------------------------------------------------------------------------------------
-|
-| item id | null -> toggle
-|
-*/
+// ----------------------------------------------------------------------------------------------------------------
+
 const currentItemIndex: Ref<string | null> = ref(null)
-const tabItem: TabItem = (id) => {
+
+function tabItem(id: string) {
+
   if (id === currentItemIndex.value) {
+
     currentItemIndex.value = null
+
   } else {
+
     currentItemIndex.value = id
+
   }
+
 }
+
 provide(TabItemKey, tabItem)
+
+
+const key: InjectionKey<string> = Symbol('test')
+
+provide(TabItemKey, tabItem)
+
+// ----------------------------------------------------------------------------------------------------------------
 
 const list = [
   {
@@ -88,7 +94,7 @@ const list = [
     caption: '전북 부안군 부안읍 번영로 149',
     captionAccent: '580m',
     thumbnail: 'example1.jpg',
-    storeStatus: storeStatusType('Open'),
+    storeStatus: getStoreStatusType('Open'),
     openingHours: '월~일 • 24시간',
     contact: '0507-1339-1343',
     fee: '최초 1시간 • 2시간 초과시 기본요금 1,500'
@@ -100,7 +106,7 @@ const list = [
     caption: '149, Beonyeong-ro, Buan-eup, Buan-gun, Jeollabuk-do, Republic of Korea',
     captionAccent: '580m',
     thumbnail: 'example2.jpg',
-    storeStatus: storeStatusType('Close'),
+    storeStatus: getStoreStatusType('Close'),
     openingHours: '월~일 • 24시간',
     contact: '0507-1339-1343',
     fee: '최초 2시간 • 2시간 초과시 기본요금 2,000'
@@ -112,7 +118,7 @@ const list = [
     caption: '전북 부안군 부안읍 번영로 149',
     captionAccent: '580m',
     thumbnail: 'example2.jpg',
-    storeStatus: storeStatusType('Holiday'),
+    storeStatus: getStoreStatusType('Holiday'),
     openingHours: '월~일 • 24시간',
     contact: '0507-1339-1343',
     fee: '최초 20시간 • 2시간 초과시 기본요금 20,000'
