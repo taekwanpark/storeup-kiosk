@@ -1,6 +1,6 @@
-import {app, BrowserWindow, ipcMain, shell} from 'electron'
-import {join} from 'path'
-import {electronApp, optimizer, is} from '@electron-toolkit/utils'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
+import { join } from 'path'
+import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ function createWindow(): void {
     height: 1920,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? {icon} : {}),
+    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
@@ -27,7 +27,6 @@ function createWindow(): void {
       additionalArguments: ['--allow-file-access-from-files']
     }
   })
-
 
   /*
   |----------------------------------------------------------------------------------------
@@ -42,7 +41,6 @@ function createWindow(): void {
     console.log('---- READY-TO-SHOW ----')
 
     if (mainWindow) mainWindow.show()
-
   })
 
   /*
@@ -60,7 +58,7 @@ function createWindow(): void {
   */
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
-    return {action: 'deny'}
+    return { action: 'deny' }
   })
 
   // HMR for renderer base on electron-vite cli.
@@ -73,17 +71,13 @@ function createWindow(): void {
   */
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-
     console.log('---- SINGLE PAGE: DEV ----')
 
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
-
   } else {
-
     console.log('---- SINGLE PAGE: PROD ----')
 
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
-
   }
   /*
   |----------------------------------------------------------------
@@ -104,22 +98,15 @@ function createWindow(): void {
   |----------------------------------------------------------------
   */
   mainWindow.webContents.on('before-input-event', (_, input) => {
-
     if (mainWindow) {
-
       if ((input.control || input.meta) && input.key.toLowerCase() === '=') {
         // 확대
         mainWindow.webContents.setZoomFactor(mainWindow.webContents.getZoomFactor() + 0.1)
-
       } else if ((input.control || input.meta) && input.key.toLowerCase() === '-') {
-
         // 축소
         mainWindow.webContents.setZoomFactor(mainWindow.webContents.getZoomFactor() - 0.1)
-
       }
-
     }
-
   })
 
   /*
@@ -128,7 +115,6 @@ function createWindow(): void {
   |----------------------------------------------------------------
   */
   mainWindow.webContents.openDevTools()
-
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -174,6 +160,7 @@ app.whenReady().then(() => {
     // On certificate error we disable default behaviour (stop loading the page)
     // and we then say "it is all fine - true" to the callback
     event.preventDefault()
+
     callback(true)
   })
 })
@@ -183,11 +170,9 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-
   console.log('---- WINDOW-ALL-CLOSED ----')
 
   if (process.platform !== 'darwin') app.quit()
-
 })
 
 // In this file you can include the rest of your app"s specific main process
@@ -195,7 +180,6 @@ app.on('window-all-closed', () => {
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function ipcHandler(): void {
-  
   console.log('---- ipcHandler ----')
 
   ipcMain.on('set-title', handleSetTitle)
