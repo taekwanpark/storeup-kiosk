@@ -1,5 +1,5 @@
-import { contextBridge, ipcRenderer } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+import {contextBridge, ipcRenderer} from 'electron'
+import {electronAPI} from '@electron-toolkit/preload'
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
@@ -18,11 +18,18 @@ if (process.contextIsolated) {
 
   /*
   |------------------------------------------------------------------------
-  | 
+  |
   |------------------------------------------------------------------------
   */
   console.log('preload')
   try {
+    // example
+    contextBridge.exposeInMainWorld('versions', {
+      node: () => process.versions.node,
+      chrome: () => process.versions.chrome,
+      electron: () => process.versions.electron
+      // we can also expose variables, not just functions
+    })
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('iElectronApi', {
       setTitle: (title: string) => ipcRenderer.send('set-title', title)
