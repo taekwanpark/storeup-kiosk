@@ -1,12 +1,12 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
+import {ElectronAPI} from '@electron-toolkit/preload'
 
-export interface IElectronAPI {
-  setTitle: (value: string) => void
+export interface KioskElectronApi {
+    setTitle: (value: string) => void
 }
 
 declare global {
-  interface Window {
-    electron: ElectronAPI
-    iElectronApi: IElectronAPI
-  }
+    interface Window {
+        electron: ElectronAPI
+        kioskElectronApi: KioskElectronApi
+    }
 }
